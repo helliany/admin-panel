@@ -1,10 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm/LoginForm";
 
 const Login = () => {
   return (
-    <Box display="flex" p={2} margin="auto" height="100vh">
+    <Box display="flex" margin="auto" height="100vh">
       <Grid
         container
         direction="column"
@@ -15,6 +16,9 @@ const Login = () => {
           Войти
         </Typography>
         <LoginForm />
+        <Box mt={2}>
+          Или вы можете <Link to="/signup">зарегистрироваться</Link>
+        </Box>
       </Grid>
     </Box>
   );
