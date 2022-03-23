@@ -1,6 +1,12 @@
 import React from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { styled } from "@mui/system";
+
+const Form = styled("form")({
+  width: 400,
+  maxWidth: "100%",
+});
 
 const LoginForm = () => {
   const {
@@ -13,16 +19,10 @@ const LoginForm = () => {
       password: "",
     },
   });
-  const onSubmit = (data) => console.log("h", data);
+  const onSubmit = (data) => console.log("data", data);
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      style={{
-        width: 400,
-        maxWidth: "100%",
-      }}
-    >
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Grid container direction="column" spacing={4}>
         <Grid item>
           <TextField
@@ -69,7 +69,7 @@ const LoginForm = () => {
           </Button>
         </Grid>
       </Grid>
-    </form>
+    </Form>
   );
 };
 

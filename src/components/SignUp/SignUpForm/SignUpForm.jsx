@@ -1,6 +1,12 @@
 import React from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { styled } from "@mui/system";
+
+const Form = styled("form")({
+  width: 400,
+  maxWidth: "100%",
+});
 
 const SignUpForm = () => {
   const {
@@ -11,18 +17,13 @@ const SignUpForm = () => {
     defaultValues: {
       username: "",
       password: "",
+      login: "",
     },
   });
-  const onSubmit = (data) => console.log("h", data);
+  const onSubmit = (data) => console.log("data", data);
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      style={{
-        width: 400,
-        maxWidth: "100%",
-      }}
-    >
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Grid container direction="column" spacing={4}>
         <Grid item>
           <TextField
@@ -56,6 +57,17 @@ const SignUpForm = () => {
           <Box color="error.main">{errors.password?.message}</Box>
         </Grid>
         <Grid item>
+          <TextField
+            label="Логин"
+            variant="outlined"
+            {...register("login", {
+              required: "Это поле обязательно",
+            })}
+            fullWidth
+          />
+          <Box color="error.main">{errors.login?.message}</Box>
+        </Grid>
+        <Grid item>
           <Button
             variant="contained"
             size="large"
@@ -69,7 +81,7 @@ const SignUpForm = () => {
           </Button>
         </Grid>
       </Grid>
-    </form>
+    </Form>
   );
 };
 
