@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { styled } from "@mui/system";
+import { authAPI } from "../../../api/api";
 
 const Form = styled("form")({
   width: 400,
@@ -20,7 +21,13 @@ const SignUpForm = () => {
       login: "",
     },
   });
-  const onSubmit = (data) => console.log("data", data);
+  
+  const onSubmit = async (data) => {
+    const response = await authAPI.signup(data);
+    if (response && response.status === 201) {
+      console.log("res", response);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -29,7 +36,7 @@ const SignUpForm = () => {
           <TextField
             label="Почта"
             variant="outlined"
-            {...register("username", {
+            {...register("email", {
               required: "Это поле обязательно",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -38,7 +45,7 @@ const SignUpForm = () => {
             })}
             fullWidth
           />
-          <Box color="error.main">{errors.username?.message}</Box>
+          <Box color="error.main">{errors.email?.message}</Box>
         </Grid>
         <Grid item>
           <TextField
@@ -60,12 +67,12 @@ const SignUpForm = () => {
           <TextField
             label="Логин"
             variant="outlined"
-            {...register("login", {
+            {...register("username", {
               required: "Это поле обязательно",
             })}
             fullWidth
           />
-          <Box color="error.main">{errors.login?.message}</Box>
+          <Box color="error.main">{errors.username?.message}</Box>
         </Grid>
         <Grid item>
           <Button

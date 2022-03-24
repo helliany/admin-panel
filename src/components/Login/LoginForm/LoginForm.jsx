@@ -26,14 +26,10 @@ const LoginForm = () => {
       <Grid container direction="column" spacing={4}>
         <Grid item>
           <TextField
-            label="Почта"
+            label="Логин"
             variant="outlined"
             {...register("username", {
               required: "Это поле обязательно",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Некорректный адрес почты",
-              },
             })}
             fullWidth
           />
