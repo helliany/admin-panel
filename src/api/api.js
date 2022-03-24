@@ -1,7 +1,7 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://82.146.34.31/",
+  baseURL: "https://game-admin.ru/",
 });
 
 export const authAPI = {
@@ -11,11 +11,11 @@ export const authAPI = {
     });
   },
   login(username, password) {
-    return instance.post("", { username, password }).catch((error) => {
+    return instance.post("/auth/cookie/login/", { username, password }).catch((error) => {
       console.log(error);
     });
   },
   logout() {
-    return instance.delete(`/auth/login/`);
+    return instance.post(`/auth/cookie/logout`);
   },
 };

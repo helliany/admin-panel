@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { styled } from "@mui/system";
+import { login } from "../../../redux/auth-reducer";
+import { useDispatch } from "react-redux";
 
 const Form = styled("form")({
   width: 400,
@@ -19,7 +21,11 @@ const LoginForm = () => {
       password: "",
     },
   });
-  const onSubmit = (data) => console.log("data", data);
+  const dispatch = useDispatch();
+
+  const onSubmit = async (data) => {
+    dispatch(login(data));
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

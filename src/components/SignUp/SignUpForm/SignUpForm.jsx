@@ -3,6 +3,8 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { styled } from "@mui/system";
 import { authAPI } from "../../../api/api";
+import { login } from "../../../redux/auth-reducer";
+import { useDispatch } from "react-redux";
 
 const Form = styled("form")({
   width: 400,
@@ -21,11 +23,12 @@ const SignUpForm = () => {
       login: "",
     },
   });
+  const dispatch = useDispatch();
   
   const onSubmit = async (data) => {
     const response = await authAPI.signup(data);
     if (response && response.status === 201) {
-      console.log("res", response);
+      dispatch(login(data));
     }
   };
 

@@ -23,7 +23,7 @@ export const setAuthUser = (isAuth) => ({
   payload: { isAuth },
 });
 
-export const login = (username, password) => async (dispatch) => {
+export const login = ({username, password}) => async (dispatch) => {
   const response = await authAPI.login(username, password);
   if (response && response.status === 200) {
     dispatch(setAuthUser(true));
