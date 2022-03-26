@@ -30,6 +30,13 @@ export const login = ({username, password}) => async (dispatch) => {
   }
 };
 
+export const usersMe = () => async (dispatch) => {
+  const response = await authAPI.usersme();
+  if (response && response.status === 200) {
+    dispatch(setAuthUser(true));
+  }
+};
+
 export const logout = () => async (dispatch) => {
   dispatch(setAuthUser(false));
 };

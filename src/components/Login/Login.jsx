@@ -1,7 +1,8 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 import LoginForm from "./LoginForm/LoginForm";
 
 const StyledLink = styled(Link)(({ theme }) => ({
@@ -13,23 +14,37 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }));
 
 const Login = () => {
+  const { isAuth } = useSelector((state) => state.auth);
+
   return (
-    <Box display="flex" margin="auto">
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Typography mb={5} variant="h3" component="h1" color={"text.primary"}>
-          Войти
-        </Typography>
-        <LoginForm />
-        <Box mt={3} color={"text.primary"}>
-          Или вы можете <StyledLink to="/signup">зарегистрироваться</StyledLink>
+    <>
+      {isAuth ? (
+        <Navigate to="/" replace />
+      ) : (
+        <Box display="flex" margin="auto" maxWidth="100%">
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography
+              mb={5}
+              variant="h3"
+              component="h1"
+              color={"text.primary"}
+            >
+              Войти
+            </Typography>
+            <LoginForm />
+            <Box mt={3} color={"text.primary"}>
+              Или вы можете{" "}
+              <StyledLink to="/signup">зарегистрироваться</StyledLink>
+            </Box>
+          </Grid>
         </Box>
-      </Grid>
-    </Box>
+      )}
+    </>
   );
 };
 

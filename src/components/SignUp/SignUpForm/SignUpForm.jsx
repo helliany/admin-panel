@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { styled } from "@mui/system";
@@ -24,11 +24,22 @@ const SignUpForm = () => {
     },
   });
   const dispatch = useDispatch();
-  
+  const [serverError, setServerError] = useState("");
+
   const onSubmit = async (data) => {
-    const response = await authAPI.signup(data);
-    if (response && response.status === 201) {
-      dispatch(login(data));
+    setServerError("");
+
+    try {
+      const response = await authAPI.signup(data);
+      if (response && response?.status === 201) {
+        dispatch(login(data));
+      }
+    } catch (err) {
+      if (err?.response?.status === 400) {
+        setServerError("Такой пользователь уже существует");
+      } else {
+        setServerError("Что-то пошло не так:(");
+      }
     }
   };
 
@@ -89,6 +100,11 @@ const SignUpForm = () => {
           >
             Отправить
           </Button>
+          {serverError && (
+            <Box mt={1} color="error.main">
+              {serverError}
+            </Box>
+          )}
         </Grid>
       </Grid>
     </Form>

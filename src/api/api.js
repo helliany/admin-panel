@@ -1,21 +1,22 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://game-admin.ru/",
+  baseURL: "https://game-admin.ru/api/",
 });
 
 export const authAPI = {
   signup({ email, password, username }) {
-    return instance.post("/auth/register/", { email, password, username }).catch((error) => {
-      console.log(error);
-    });
+    return instance.post("/register", { email, password, username })
   },
   login(username, password) {
-    return instance.post("/auth/cookie/login/", { username, password }).catch((error) => {
-      console.log(error);
-    });
+    return instance.post("/login", { username, password })
   },
   logout() {
-    return instance.post(`/auth/cookie/logout`);
+    return instance.post(`/logout`);
   },
+  usersme() {
+    return instance.get(`/users/me`).catch((error) => {
+      console.log(error);
+    });
+  }
 };

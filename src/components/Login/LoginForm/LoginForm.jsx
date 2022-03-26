@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { styled } from "@mui/system";
@@ -22,9 +22,18 @@ const LoginForm = () => {
     },
   });
   const dispatch = useDispatch();
+  const [serverError, setServerError] = useState("");
 
   const onSubmit = async (data) => {
-    dispatch(login(data));
+    setServerError("");
+
+    dispatch(login(data)).catch((err) => {
+      if (err?.response?.status === 400 || err?.response?.status === 422) {
+        setServerError("Неверный логин или пароль");
+      } else {
+        setServerError("Что-то пошло не так:(");
+      }
+    });
   };
 
   return (
@@ -32,7 +41,7 @@ const LoginForm = () => {
       <Grid container direction="column" spacing={4}>
         <Grid item>
           <TextField
-            label="Логин"
+            label="Почта"
             variant="outlined"
             {...register("username", {
               required: "Это поле обязательно",
@@ -69,6 +78,11 @@ const LoginForm = () => {
           >
             Войти
           </Button>
+          {serverError && (
+            <Box mt={1} color="error.main">
+              {serverError}
+            </Box>
+          )}
         </Grid>
       </Grid>
     </Form>
