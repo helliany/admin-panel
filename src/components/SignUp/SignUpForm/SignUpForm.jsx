@@ -32,7 +32,7 @@ const SignUpForm = () => {
     try {
       const response = await authAPI.signup(data);
       if (response && response?.status === 201) {
-        dispatch(login(data));
+        dispatch(login({ username: data.email, password: data.password }));
       }
     } catch (err) {
       if (err?.response?.status === 400) {

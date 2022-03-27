@@ -38,7 +38,10 @@ export const usersMe = () => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  dispatch(setAuthUser(false));
+  const response = await authAPI.logout();
+  if (response && response.status === 200) {
+    dispatch(setAuthUser(false));
+  }
 };
 
 export default authReducer;

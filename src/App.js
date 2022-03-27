@@ -42,17 +42,20 @@ const App = () => {
         <Router basename={process.env.PUBLIC_URL}>
           <Box
             sx={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100vh",
               bgcolor: "background.default",
             }}
           >
+            <Header />
             <Container
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                minHeight: "100vh",
+                flexGrow: 1,
               }}
             >
-              <Header />
               <Routes>
                 <Route
                   path="/"

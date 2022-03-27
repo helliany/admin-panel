@@ -17,16 +17,16 @@ const ThemeModeSwitcher = () => {
         alignItems: "center",
         justifyContent: "center",
         bgcolor: "background.default",
-        color: "text.primary",
-        borderRadius: 1,
-        p: 1,
+        color: "primary.dark",
+        border: "1px solid",
+        borderColor: "grey.300",
+        borderRadius: 2,
       }}
     >
-      {theme.palette.mode} mode
       <IconButton
-        sx={{ ml: 1 }}
         onClick={colorMode.toggleColorMode}
         color="inherit"
+        size="small"
       >
         {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
       </IconButton>
