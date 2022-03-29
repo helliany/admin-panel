@@ -20,7 +20,7 @@ const SignUpForm = () => {
     defaultValues: {
       username: "",
       password: "",
-      login: "",
+      email: "",
     },
   });
   const dispatch = useDispatch();
@@ -31,8 +31,8 @@ const SignUpForm = () => {
 
     try {
       const response = await authAPI.signup(data);
-      if (response && response?.status === 201) {
-        dispatch(login({ username: data.email, password: data.password }));
+      if (response && response?.status === 200) {
+        dispatch(login(data));
       }
     } catch (err) {
       if (err?.response?.status === 400) {

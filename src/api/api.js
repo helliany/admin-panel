@@ -6,28 +6,19 @@ const instance = axios.create({
 
 export const authAPI = {
   signup({ email, password, username }) {
-    return instance.post("/register", { email, password, username });
+    return instance.post("/register", { email, password, name: username });
   },
-  login(username, password) {
-    return instance.post("/login", `username=${username}&password=${password}`);
+  login(email, password) {
+    return instance.post("/login", { email, password });
   },
   logout() {
-    return fetch("https://game-admin.ru/api/logout", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    return instance.get(`/logout`, { withCredentials: true }).catch((error) => {
+      console.log(error);
     });
-    // return instance.post(`/logout`, {}, { withCredentials: true }).catch((error) => {
-    //   console.log(error);
-    // });
   },
   usersme() {
-    return instance
-      .get(`/users/me`, { withCredentials: true })
-      .catch((error) => {
-        console.log(error);
-      });
+    return instance.get(`/me`, { withCredentials: true }).catch((error) => {
+      console.log(error);
+    });
   },
 };

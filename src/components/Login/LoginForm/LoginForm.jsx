@@ -17,7 +17,7 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
@@ -43,12 +43,12 @@ const LoginForm = () => {
           <TextField
             label="Почта"
             variant="outlined"
-            {...register("username", {
+            {...register("email", {
               required: "Это поле обязательно",
             })}
             fullWidth
           />
-          <Box color="error.main">{errors.username?.message}</Box>
+          <Box color="error.main">{errors.email?.message}</Box>
         </Grid>
         <Grid item>
           <TextField
