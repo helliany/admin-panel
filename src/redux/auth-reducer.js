@@ -31,9 +31,13 @@ export const login = ({email, password}) => async (dispatch) => {
 };
 
 export const usersMe = () => async (dispatch) => {
-  const response = await authAPI.usersme();
-  if (response && response.status === 200) {
-    dispatch(setAuthUser(true));
+  try {
+    const response = await authAPI.usersme();
+    if (response && response.status === 200) {
+      dispatch(setAuthUser(true));
+    }
+  } catch {
+    dispatch(setAuthUser(false));
   }
 };
 

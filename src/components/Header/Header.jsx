@@ -3,7 +3,7 @@ import { Button, Container, Grid, Box } from "@mui/material";
 import ThemeModeSwitcher from "../common/ThemeModeSwitcher/ThemeModeSwitcher";
 import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "@mui/icons-material";
-import { logout, usersMe } from "../../redux/auth-reducer";
+import { logout } from "../../redux/auth-reducer";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,6 @@ const Header = () => {
             <Grid item>
               <ThemeModeSwitcher />
             </Grid>
-            <Button onClick={() => dispatch(usersMe())}>UsersMe</Button>
             {isAuth && (
               <Grid item>
                 <Button

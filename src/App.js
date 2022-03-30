@@ -27,6 +27,11 @@ const App = () => {
       createTheme({
         palette: {
           mode,
+          ...(mode === 'light' && {
+            background: {
+              default: '#fdfdfd'
+            }
+          })
         },
       }),
     [mode]
