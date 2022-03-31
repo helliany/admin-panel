@@ -27,11 +27,11 @@ const Home = () => {
         <Typography mb={5} variant="h3" component="h1" color={"text.primary"}>
           Admin Panel
         </Typography>
-        <Grid container spacing={{xs: 4, sm: 6, md: 8}}>
-          <Grid item xs={12} sm={6}>
+        <Grid container spacing={{xs: 4, lg: 8}}>
+          <Grid item xs={12} md={6}>
             <HomeUserMoney />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} md={6}>
             <HomeUserOnline dataOnline={dataOnline} />
           </Grid>
           <Grid item xs={12} sx={{width: "100%", height: "440px"}}>

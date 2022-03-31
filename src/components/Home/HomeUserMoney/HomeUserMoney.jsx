@@ -13,7 +13,6 @@ const HomeUserMoney = () => {
       .usermoney()
       .then((res) => {
         setData(res.data);
-        console.log(res.data);
       })
       .catch(() => {
         setIsError(true);
@@ -21,25 +20,25 @@ const HomeUserMoney = () => {
   }, []);
 
   return (
-    <Card sx={{ p: 3, height: "100%" }}>
+    <Card sx={{ p: 3, height: "100%" }} elevation={4}>
       <Grid container direction="column" alignItems="flex-start" spacing={2}>
-        <Grid container item alignItems="flex-start" spacing={2}>
+        <Grid container item alignItems="flex-start" spacing={2} wrap="nowrap">
           <Grid item>
             <PaidIcon sx={{ color: "warning.main" }} />
           </Grid>
           <Grid item sx={{ fontSize: 18 }}>
-            Денег:{" "}
+            Всего денег у пользователей:{" "}
             <Box component="span" sx={{ fontWeight: "700" }}>
               {data?.money}
             </Box>
           </Grid>
         </Grid>
-        <Grid container item alignItems="flex-start" spacing={2}>
+        <Grid container item alignItems="flex-start" spacing={2} wrap="nowrap">
           <Grid item>
             <LiquorIcon sx={{ color: "primary.dark" }} />
           </Grid>
           <Grid item sx={{ fontSize: 18 }}>
-            Бутылок:{" "}
+            Всего бутылок у пользователей:{" "}
             <Box component="span" sx={{ fontWeight: "700" }}>
               {data?.bottle}
             </Box>

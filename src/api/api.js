@@ -28,4 +28,13 @@ export const homeAPI = {
   useronline(date) {
     return instance.post(`/main_page/graph_online`, {date_start: date.start, date_end: date.end}, { withCredentials: true })
   }
-}
+};
+
+export const modelsAPI = {
+  models() {
+    return instance.get(`/models/all`, { withCredentials: true });
+  },
+  model(name) {
+    return instance.get(`/model?model_name=${name}`, { withCredentials: true });
+  }
+};

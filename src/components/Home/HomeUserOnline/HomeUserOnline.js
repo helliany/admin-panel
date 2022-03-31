@@ -14,9 +14,9 @@ const HomeUserOnline = ({ dataOnline }) => {
   }, [dataOnline]);
 
   return (
-    <Card sx={{ p: 3, height: "100%" }}>
+    <Card sx={{ p: 3, height: "100%" }} elevation={4}>
       <Grid container direction="column" alignItems="flex-start" spacing={2}>
-        <Grid container item alignItems="flex-start" spacing={2}>
+        <Grid container item alignItems="flex-start" spacing={2} wrap="nowrap">
           <Grid item>
             <EventIcon sx={{ color: "success.main" }} />
           </Grid>
@@ -26,23 +26,23 @@ const HomeUserOnline = ({ dataOnline }) => {
             </Box>
           </Grid>
         </Grid>
-        <Grid container item alignItems="flex-start" spacing={2}>
+        <Grid container item alignItems="flex-start" spacing={2} wrap="nowrap">
           <Grid item>
             <MessageIcon sx={{ color: "primary.light" }} />
           </Grid>
           <Grid item sx={{ fontSize: 18 }}>
-            Сообщений:{" "}
+            Всего сообщений:{" "}
             <Box component="span" sx={{ fontWeight: "700" }}>
               {data?.total_message}
             </Box>
           </Grid>
         </Grid>
-        <Grid container item alignItems="flex-start" spacing={2}>
+        <Grid container item alignItems="flex-start" spacing={2} wrap="nowrap">
           <Grid item>
             <PersonIcon sx={{ color: "secondary.main" }} />
           </Grid>
           <Grid item sx={{ fontSize: 18 }}>
-            Пользователей:{" "}
+            Всего пользователей:{" "}
             <Box component="span" sx={{ fontWeight: "700" }}>
               {data?.count_users}
             </Box>

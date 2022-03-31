@@ -10,27 +10,14 @@ const ThemeModeSwitcher = () => {
   const colorMode = useContext(ColorModeContext);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-        bgcolor: "background.default",
-        color: "primary.dark",
-        border: "1px solid",
-        borderColor: "grey.300",
-        borderRadius: 2,
-      }}
-    >
+   
       <IconButton
         onClick={colorMode.toggleColorMode}
-        color="inherit"
         size="small"
+        color="primary"
       >
         {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
       </IconButton>
-    </Box>
   );
 };
 

@@ -1,14 +1,16 @@
 import { Container, createTheme, ThemeProvider, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import ColorModeContext from "./context/context";
+import PrivateRoute from "./routes/PrivateRoute";
+import { usersMe } from "./redux/auth-reducer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
-import PrivateRoute from "./routes/PrivateRoute";
-import { useEffect, useMemo, useState } from "react";
-import ColorModeContext from "./context/context";
 import Header from "./components/Header/Header";
-import { usersMe } from "./redux/auth-reducer";
+import Models from "./components/Models/Models";
+import Model from "./components/Models/Model/Model";
 
 const App = () => {
   const [mode, setMode] = useState("light");
@@ -27,11 +29,11 @@ const App = () => {
       createTheme({
         palette: {
           mode,
-          ...(mode === 'light' && {
+          ...(mode === "light" && {
             background: {
-              default: '#fdfdfd'
-            }
-          })
+              default: "#f5f5f5",
+            },
+          }),
         },
       }),
     [mode]
@@ -72,6 +74,8 @@ const App = () => {
                 />
                 <Route path="signup" element={<SignUp />} />
                 <Route path="login" element={<Login />} />
+                <Route path="models" element={<Models />} />
+                <Route path="models/:name" element={<Model />} />
               </Routes>
             </Container>
           </Box>
