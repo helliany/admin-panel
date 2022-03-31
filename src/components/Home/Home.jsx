@@ -4,6 +4,7 @@ import HomeUserMoney from "./HomeUserMoney/HomeUserMoney";
 import HomeUserOnline from "./HomeUserOnline/HomeUserOnline";
 import HomeOnlineChart from "./HomeOnlineChart/HomeOnlineChart";
 import { homeAPI } from "../../api/api";
+import dayjs from "dayjs";
 
 const Home = () => {
   const [dataOnline, setDataOnline] = useState([]);
@@ -11,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     homeAPI
-      .useronline({ start: "2022-03-01", end: "2022-03-30" })
+      .useronline({ start: dayjs().subtract(30, "day").format("YYYY-MM-DD"), end: dayjs().format("YYYY-MM-DD") })
       .then((res) => {
         setDataOnline(res.data.graph_info);
       })
