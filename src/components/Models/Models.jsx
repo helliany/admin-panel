@@ -41,7 +41,7 @@ const Models = () => {
           Models
         </Typography>
         <nav>
-          <List sx={{ maxHeight: "510px", overflow: "auto" }}>
+          <List sx={{ maxHeight: "490px", overflow: "auto" }}>
             {data.length > 0 &&
               data.map((item) => (
                 <ListItem key={item} sx={{ px: 2 }} disablePadding>

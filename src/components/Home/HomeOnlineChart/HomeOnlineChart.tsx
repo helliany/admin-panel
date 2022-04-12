@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { Card, useTheme } from "@mui/material";
 
-const HomeOnlineChart = ({ dataChart }) => {
+const HomeOnlineChart: React.FC<{dataChart: object[]}> = ({ dataChart }) => {
   const theme = useTheme();
 
   return (

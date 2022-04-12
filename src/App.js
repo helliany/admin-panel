@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import ColorModeContext from "./context/context";
 import PrivateRoute from "./routes/PrivateRoute";
 import { usersMe } from "./redux/auth-reducer";
-import Home from "./components/Home/Home";
+import Home from "./components/Home/Home.tsx";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import Header from "./components/Header/Header";

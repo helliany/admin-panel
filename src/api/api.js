@@ -23,7 +23,9 @@ export const authAPI = {
 
 export const homeAPI = {
   usermoney() {
-    return instance.post(`/main_page/user_money`, {}, { withCredentials: true })
+    return instance.post(`/main_page/user_money`, {}, { withCredentials: true }).catch((error) => {
+      console.log(error);
+    });
   },
   useronline(date) {
     return instance.post(`/main_page/graph_online`, {date_start: date.start, date_end: date.end}, { withCredentials: true })

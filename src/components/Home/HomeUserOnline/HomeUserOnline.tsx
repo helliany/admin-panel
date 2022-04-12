@@ -4,10 +4,20 @@ import EventIcon from "@mui/icons-material/Event";
 import MessageIcon from "@mui/icons-material/Message";
 import PersonIcon from "@mui/icons-material/Person";
 import dayjs from "dayjs";
-import 'dayjs/locale/ru';
+import "dayjs/locale/ru";
 
-const HomeUserOnline = ({ dataOnline }) => {
-  const [data, setData] = useState([]);
+interface IProps {
+  dataOnline: TData[];
+}
+
+type TData = {
+  date?: string;
+  total_message?: number;
+  count_users?: number;
+};
+
+const HomeUserOnline: React.FC<IProps> = ({ dataOnline }) => {
+  const [data, setData] = useState<TData>({});
 
   useEffect(() => {
     setData(dataOnline[dataOnline.length - 1]);
@@ -22,7 +32,7 @@ const HomeUserOnline = ({ dataOnline }) => {
           </Grid>
           <Grid item sx={{ fontSize: 18 }}>
             <Box component="span" sx={{ fontWeight: "700" }}>
-              {dayjs(data?.date).locale('ru').format('D MMMM, YYYY')}
+              {dayjs(data?.date).locale("ru").format("D MMMM, YYYY")}
             </Box>
           </Grid>
         </Grid>

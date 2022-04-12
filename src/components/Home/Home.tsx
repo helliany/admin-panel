@@ -6,7 +6,7 @@ import HomeOnlineChart from "./HomeOnlineChart/HomeOnlineChart";
 import { homeAPI } from "../../api/api";
 import dayjs from "dayjs";
 
-const Home = () => {
+const Home: React.FC = () => {
   const [dataOnline, setDataOnline] = useState([]);
   const [isError, setIsError] = useState(false);
 
@@ -34,9 +34,11 @@ const Home = () => {
           <Grid item xs={12} md={6}>
             <HomeUserOnline dataOnline={dataOnline} />
           </Grid>
-          <Grid item xs={12} sx={{width: "100%", height: "440px"}}>
-            <HomeOnlineChart dataChart={dataOnline} />
-          </Grid>
+          {!isError && (
+            <Grid item xs={12} sx={{width: "100%", height: "440px"}}>
+              <HomeOnlineChart dataChart={dataOnline} />
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Box>

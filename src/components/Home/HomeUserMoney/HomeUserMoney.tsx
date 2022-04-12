@@ -4,19 +4,18 @@ import PaidIcon from "@mui/icons-material/Paid";
 import LiquorIcon from "@mui/icons-material/Liquor";
 import { Grid, Card, Box } from "@mui/material";
 
-const HomeUserMoney = () => {
-  const [data, setData] = useState([]);
-  const [isError, setIsError] = useState(false);
+type TData = {
+  money?: number;
+  bottle?: number;
+};
+
+const HomeUserMoney: React.FC = () => {
+  const [data, setData] = useState<TData>({});
 
   useEffect(() => {
-    homeAPI
-      .usermoney()
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch(() => {
-        setIsError(true);
-      });
+    homeAPI.usermoney().then((res: { data: React.SetStateAction<TData> }) => {
+      setData(res.data);
+    });
   }, []);
 
   return (
