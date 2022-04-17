@@ -3,19 +3,20 @@ import { homeAPI } from "../../../api/api";
 import PaidIcon from "@mui/icons-material/Paid";
 import LiquorIcon from "@mui/icons-material/Liquor";
 import { Grid, Card, Box } from "@mui/material";
-
-type TData = {
-  money?: number;
-  bottle?: number;
-};
+import { IUserMoney } from "../../../types/userMoney.model";
 
 const HomeUserMoney: React.FC = () => {
-  const [data, setData] = useState<TData>({});
+  const [data, setData] = useState<IUserMoney>({ money: 0, bottle: 0 });
 
   useEffect(() => {
-    homeAPI.usermoney().then((res: { data: React.SetStateAction<TData> }) => {
-      setData(res.data);
-    });
+    homeAPI
+      .usermoney()
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (

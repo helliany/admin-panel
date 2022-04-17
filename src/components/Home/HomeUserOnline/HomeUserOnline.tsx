@@ -5,19 +5,14 @@ import MessageIcon from "@mui/icons-material/Message";
 import PersonIcon from "@mui/icons-material/Person";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
+import { IUserOnline } from "../../../types/userOnline.model";
 
 interface IProps {
-  dataOnline: TData[];
+  dataOnline: IUserOnline[];
 }
 
-type TData = {
-  date?: string;
-  total_message?: number;
-  count_users?: number;
-};
-
 const HomeUserOnline: React.FC<IProps> = ({ dataOnline }) => {
-  const [data, setData] = useState<TData>({});
+  const [data, setData] = useState<IUserOnline | null>(null);
 
   useEffect(() => {
     setData(dataOnline[dataOnline.length - 1]);

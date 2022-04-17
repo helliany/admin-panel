@@ -1,4 +1,6 @@
-import * as axios from "axios";
+import axios from "axios";
+import { IUserMoney } from "../types/userMoney.model";
+import { IUserOnline } from "../types/userOnline.model";
 
 const instance = axios.create({
   baseURL: "https://game-admin.ru/api/",
@@ -23,20 +25,18 @@ export const authAPI = {
 
 export const homeAPI = {
   usermoney() {
-    return instance.post(`/main_page/user_money`, {}, { withCredentials: true }).catch((error) => {
-      console.log(error);
-    });
+    return instance.post<IUserMoney>(`/main_page/user_money`, {})
   },
-  useronline(date) {
-    return instance.post(`/main_page/graph_online`, {date_start: date.start, date_end: date.end}, { withCredentials: true })
+  useronline(date: { start: string; end: string; }) {
+    return instance.post<{graph_info: IUserOnline[]}>(`/main_page/graph_online`, {date_start: date.start, date_end: date.end})
   }
 };
 
 export const modelsAPI = {
   models() {
-    return instance.get(`/models/all`, { withCredentials: true });
+    return instance.get(`/models/all`);
   },
-  model(name) {
-    return instance.get(`/model?model_name=${name}`, { withCredentials: true });
+  model(name: string) {
+    return instance.get(`/model?model_name=${name}`);
   }
 };

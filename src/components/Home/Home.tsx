@@ -5,9 +5,10 @@ import HomeUserOnline from "./HomeUserOnline/HomeUserOnline";
 import HomeOnlineChart from "./HomeOnlineChart/HomeOnlineChart";
 import { homeAPI } from "../../api/api";
 import dayjs from "dayjs";
+import { IUserOnline } from "../../types/userOnline.model";
 
 const Home: React.FC = () => {
-  const [dataOnline, setDataOnline] = useState([]);
+  const [dataOnline, setDataOnline] = useState<IUserOnline[]>([]);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {

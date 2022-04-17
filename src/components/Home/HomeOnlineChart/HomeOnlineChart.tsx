@@ -12,9 +12,21 @@ import {
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { Card, useTheme } from "@mui/material";
+import { IUserOnline } from "../../../types/userOnline.model";
 
-const HomeOnlineChart: React.FC<{dataChart: object[]}> = ({ dataChart }) => {
+interface IProps {
+  dataChart: IUserOnline[];
+}
+
+const HomeOnlineChart: React.FC<IProps> = ({ dataChart }) => {
   const theme = useTheme();
+
+  const formatCount = (n: number): string => {
+    if (n >= 1e3) {
+      return `${+(n / 1e3).toFixed(1)}K`;
+    }
+    return `${n}`;
+  };
 
   return (
     <Card sx={{ p: 3, height: "100%" }} elevation={4}>
@@ -56,7 +68,10 @@ const HomeOnlineChart: React.FC<{dataChart: object[]}> = ({ dataChart }) => {
             tickFormatter={(data) => dayjs(data).locale("ru").format("D MMM")}
             tick={{ fill: theme.palette.text.primary }}
           />
-          <YAxis tick={{ fill: theme.palette.text.primary }} />
+          <YAxis
+            tick={{ fill: theme.palette.text.primary }}
+            tickFormatter={(data) => formatCount(data)}
+          />
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <Tooltip
             labelFormatter={(data) => dayjs(data).locale("ru").format("D MMMM")}
