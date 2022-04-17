@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IUserModel } from "../types/userModel.model";
 import { IUserMoney } from "../types/userMoney.model";
 import { IUserOnline } from "../types/userOnline.model";
 
@@ -34,9 +35,9 @@ export const homeAPI = {
 
 export const modelsAPI = {
   models() {
-    return instance.get(`/models/all`);
+    return instance.get<string[]>(`/models/all`);
   },
   model(name: string) {
-    return instance.get(`/model?model_name=${name}`);
+    return instance.get<IUserModel>(`/model?model_name=${name}`);
   }
 };

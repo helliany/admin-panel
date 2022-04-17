@@ -13,8 +13,8 @@ import { modelsAPI } from "../../api/api";
 import LinkIcon from "@mui/icons-material/Link";
 import { Box } from "@mui/system";
 
-const Models = () => {
-  const [data, setData] = useState([]);
+const UserModels: React.FC = () => {
+  const [data, setData] = useState<string[]>([]);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Models = () => {
           Models
         </Typography>
         <nav>
-          <List sx={{ maxHeight: "490px", overflow: "auto" }}>
+          <List sx={{ maxHeight: "calc(100vh - 230px)", overflow: "auto" }}>
             {data.length > 0 &&
               data.map((item) => (
                 <ListItem key={item} sx={{ px: 2 }} disablePadding>
@@ -60,4 +60,4 @@ const Models = () => {
   );
 };
 
-export default Models;
+export default UserModels;

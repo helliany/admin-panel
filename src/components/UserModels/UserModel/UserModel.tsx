@@ -1,0 +1,88 @@
+import {
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { modelsAPI } from "../../../api/api";
+
+const UserModel: React.FC = () => {
+  const [data, setData] = useState<object[]>([]);
+  const [dataValues, setDataValues] = useState<(string | number)[][]>([]);
+  const [isError, setIsError] = useState(false);
+  let { name } = useParams<string>();
+
+  useEffect(() => {
+    if (name) {
+      modelsAPI
+        .model(name)
+        .then((res) => {
+          setData(res.data.data);
+        })
+        .catch(() => {
+          setIsError(true);
+        });
+    }
+  }, [name]);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      const valuesArr = data.map((item) => [...Object.values(item)]);
+      setDataValues(valuesArr);
+    }
+  }, [data]);
+
+  return (
+    <Grid container direction="column" my={4} flexGrow={1}>
+      <Paper elevation={4} sx={{ display: "flex", flexDirection: "column", flexGrow: 1, p: 2 }}>
+        <Typography
+          mb={2}
+          align="center"
+          variant="h3"
+          component="h1"
+          color={"text.primary"}
+        >
+          Model {name}
+        </Typography>
+        <TableContainer>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                {data.length > 0 &&
+                  Object.keys(data[0]).map((item, i) => (
+                    <TableCell component="th" key={i} sx={{ fontWeight: 700 }}>
+                      {item}
+                    </TableCell>
+                  ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {dataValues.length > 0 &&
+                dataValues.map((_, i) => (
+                  <TableRow
+                    key={i}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    {dataValues[i].map((item, ind) => (
+                      <TableCell key={ind}>
+                        {item.toString() ? item : "-"}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </Grid>
+  );
+};
+
+export default UserModel;

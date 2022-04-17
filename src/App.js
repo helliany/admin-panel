@@ -9,8 +9,8 @@ import Home from "./components/Home/Home.tsx";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import Header from "./components/Header/Header";
-import Models from "./components/Models/Models";
-import Model from "./components/Models/Model/Model";
+import UserModels from "./components/UserModels/UserModels";
+import UserModel from "./components/UserModels/UserModel/UserModel";
 
 const App = () => {
   const [mode, setMode] = useState("light");
@@ -74,8 +74,8 @@ const App = () => {
                 />
                 <Route path="signup" element={<SignUp />} />
                 <Route path="login" element={<Login />} />
-                <Route path="models" element={<Models />} />
-                <Route path="models/:name" element={<Model />} />
+                <Route path="models" element={<UserModels />} />
+                <Route path="models/:name" element={<UserModel />} />
               </Routes>
             </Container>
           </Box>

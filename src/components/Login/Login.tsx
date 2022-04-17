@@ -1,8 +1,8 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
+import { useTypedSelector } from "../../hooks/hooks";
 import LoginForm from "./LoginForm/LoginForm";
 
 const StyledLink = styled(Link)(({ theme }) => ({
@@ -13,8 +13,8 @@ const StyledLink = styled(Link)(({ theme }) => ({
   },
 }));
 
-const Login = () => {
-  const { isAuth } = useSelector((state) => state.auth);
+const Login: React.FC = () => {
+  const { isAuth } = useTypedSelector((state) => state.auth);
 
   return (
     <>
