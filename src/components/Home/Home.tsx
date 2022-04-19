@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import { IUserOnline } from "../../types/userOnline.model";
 
 const Home: React.FC = () => {
-  const [dataOnline, setDataOnline] = useState<IUserOnline[]>([]);
+  const [dataOnline, setDataOnline] = useState<IUserOnline[]>([] as IUserOnline[]);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {

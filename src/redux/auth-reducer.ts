@@ -1,4 +1,4 @@
-import { Dispatch } from "redux";
+import { Action, ActionCreator, Dispatch } from "redux";
 import { authAPI } from "../api/api";
 
 const SET_USER = "SET_USER";
@@ -28,7 +28,7 @@ const authReducer = (state: IAuthState = initialState, action: IAuthAction): IAu
   }
 };
 
-export const setAuthUser = (isAuth: boolean) => ({
+export const setAuthUser: ActionCreator<Action> = (isAuth: boolean) => ({
   type: SET_USER,
   payload: { isAuth },
 });
@@ -47,7 +47,7 @@ export const usersMe = () => async (dispatch: Dispatch<IAuthAction>) => {
       dispatch(setAuthUser(true));
     }
   } catch {
-    dispatch(setAuthUser(true));
+    dispatch(setAuthUser(false));
   }
 };
 

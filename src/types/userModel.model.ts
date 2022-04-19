@@ -3,6 +3,6 @@ export interface IUserModel {
   data: IUserModalData[];
 }
 
-interface IUserModalData {
+export interface IUserModalData {
   [key: string]: string | number;
 }

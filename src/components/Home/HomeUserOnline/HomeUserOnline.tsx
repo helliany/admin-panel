@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const HomeUserOnline: React.FC<IProps> = ({ dataOnline }) => {
-  const [data, setData] = useState<IUserOnline | null>(null);
+  const [data, setData] = useState<IUserOnline>({} as IUserOnline);
 
   useEffect(() => {
     setData(dataOnline[dataOnline.length - 1]);

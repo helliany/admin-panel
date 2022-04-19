@@ -1,22 +1,29 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { styled } from "@mui/system";
 import { authAPI } from "../../../api/api";
 import { login } from "../../../redux/auth-reducer";
 import { useDispatch } from "react-redux";
+import axios from 'axios';
 
 const Form = styled("form")({
   width: 400,
   maxWidth: "100%",
 });
 
-const SignUpForm = () => {
+type FormValues = {
+  username: string,
+  password: string,
+  email: string
+}
+
+const SignUpForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     defaultValues: {
       username: "",
       password: "",
@@ -26,7 +33,7 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
   const [serverError, setServerError] = useState("");
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setServerError("");
 
     try {
@@ -35,10 +42,12 @@ const SignUpForm = () => {
         dispatch(login(data));
       }
     } catch (err) {
-      if (err?.response?.status === 400) {
-        setServerError("Такой пользователь уже существует");
-      } else {
-        setServerError("Что-то пошло не так:(");
+      if (axios.isAxiosError(err)) {
+        if (err?.response?.status === 400) {
+          setServerError("Такой пользователь уже существует");
+        } else {
+          setServerError("Что-то пошло не так:(");
+        }
       }
     }
   };

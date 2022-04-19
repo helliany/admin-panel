@@ -1,5 +1,5 @@
 import {
-  Grid,
+  Box,
   Paper,
   Table,
   TableBody,
@@ -12,9 +12,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { modelsAPI } from "../../../api/api";
+import { IUserModalData } from "../../../types/userModel.model";
 
 const UserModel: React.FC = () => {
-  const [data, setData] = useState<object[]>([]);
+  const [data, setData] = useState<IUserModalData[]>([]);
   const [dataValues, setDataValues] = useState<(string | number)[][]>([]);
   const [isError, setIsError] = useState(false);
   let { name } = useParams<string>();
@@ -40,8 +41,8 @@ const UserModel: React.FC = () => {
   }, [data]);
 
   return (
-    <Grid container direction="column" my={4} flexGrow={1}>
-      <Paper elevation={4} sx={{ display: "flex", flexDirection: "column", flexGrow: 1, p: 2 }}>
+    <Box my={4}>
+      <Paper elevation={4} sx={{ p: 2 }}>
         <Typography
           mb={2}
           align="center"
@@ -52,7 +53,7 @@ const UserModel: React.FC = () => {
           Model {name}
         </Typography>
         <TableContainer>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ mt: 2 }}>
             <TableHead>
               <TableRow>
                 {data.length > 0 &&
@@ -81,7 +82,7 @@ const UserModel: React.FC = () => {
           </Table>
         </TableContainer>
       </Paper>
-    </Grid>
+    </Box>
   );
 };
 

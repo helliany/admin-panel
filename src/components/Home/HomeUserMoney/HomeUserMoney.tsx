@@ -6,7 +6,7 @@ import { Grid, Card, Box } from "@mui/material";
 import { IUserMoney } from "../../../types/userMoney.model";
 
 const HomeUserMoney: React.FC = () => {
-  const [data, setData] = useState<IUserMoney>({ money: 0, bottle: 0 });
+  const [data, setData] = useState<IUserMoney>({} as IUserMoney);
 
   useEffect(() => {
     homeAPI
@@ -29,7 +29,7 @@ const HomeUserMoney: React.FC = () => {
           <Grid item sx={{ fontSize: 18 }}>
             Всего денег у пользователей:{" "}
             <Box component="span" sx={{ fontWeight: "700" }}>
-              {data?.money}
+              {data.money}
             </Box>
           </Grid>
         </Grid>
@@ -40,7 +40,7 @@ const HomeUserMoney: React.FC = () => {
           <Grid item sx={{ fontSize: 18 }}>
             Всего бутылок у пользователей:{" "}
             <Box component="span" sx={{ fontWeight: "700" }}>
-              {data?.bottle}
+              {data.bottle}
             </Box>
           </Grid>
         </Grid>

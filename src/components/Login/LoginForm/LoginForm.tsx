@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { styled } from "@mui/system";
 import { login } from "../../../redux/auth-reducer";
 import { useDispatch } from "react-redux";
+import axios from 'axios';
 
 const Form = styled("form")({
   width: 400,
   maxWidth: "100%",
 });
 
-const LoginForm = () => {
+type FormValues = {
+  password: string,
+  email: string
+}
+
+const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     defaultValues: {
       email: "",
       password: "",
@@ -24,16 +30,20 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [serverError, setServerError] = useState("");
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     setServerError("");
 
-    dispatch(login(data)).catch((err) => {
-      if (err?.response?.status === 400 || err?.response?.status === 422) {
-        setServerError("Неверный логин или пароль");
-      } else {
-        setServerError("Что-то пошло не так:(");
+    try {
+      dispatch(login(data))
+    } catch(err) {
+      if (axios.isAxiosError(err)) {
+        if (err?.response?.status === 400 || err?.response?.status === 422) {
+          setServerError("Неверный логин или пароль");
+        } else {
+          setServerError("Что-то пошло не так:(");
+        }
       }
-    });
+    }
   };
 
   return (

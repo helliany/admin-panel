@@ -26,18 +26,18 @@ export const authAPI = {
 
 export const homeAPI = {
   usermoney() {
-    return instance.post<IUserMoney>(`/main_page/user_money`, {})
+    return instance.post<IUserMoney>(`/main_page/user_money`, {}, { withCredentials: true })
   },
   useronline(date: { start: string; end: string; }) {
-    return instance.post<{graph_info: IUserOnline[]}>(`/main_page/graph_online`, {date_start: date.start, date_end: date.end})
+    return instance.post<{graph_info: IUserOnline[]}>(`/main_page/graph_online`, {date_start: date.start, date_end: date.end}, { withCredentials: true })
   }
 };
 
 export const modelsAPI = {
   models() {
-    return instance.get<string[]>(`/models/all`);
+    return instance.get<string[]>(`/models/all`, { withCredentials: true });
   },
   model(name: string) {
-    return instance.get<IUserModel>(`/model?model_name=${name}`);
+    return instance.get<IUserModel>(`/model?model_name=${name}`, { withCredentials: true });
   }
 };
