@@ -1,5 +1,5 @@
 # Admin Panel App
-Responsive SPA with registration, authorization, dark/light theme switching and player data display
+Responsive SPA with registration, authorization, dark/light theme switching and players data display
 
 ## Technologies:
 + TypeScript
